@@ -1,8 +1,12 @@
 {
     "name": "aprivette/bedrock-auth",
-    "description": "A package to enable HTTP Auth.",
-    "type": "package",
-    "license": "MIT",
+    "description": "Environment-specific basic auth for the Bedrock WordPress framework.",
+    "type": "wordpress-plugin",
+    "homepage": "https://github.com/aprivette/bedrock-auth",
+    "license": "GPL-3.0-or-later",
+    "keywords": [
+      "wordpress", "bedrock"
+    ],
     "authors": [
         {
             "name": "Adam Privette",
