@@ -1,0 +1,20 @@
+{
+    "name": "aprivette/bedrock-auth",
+    "description": "A package to enable HTTP Auth.",
+    "type": "package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adam Privette",
+            "email": "aprivette@gmail.com",
+            "homepage": "https://github.com/aprivette"
+        }
+    ],
+    "autoload": {
+        "psr-4": {"BedrockAuth\\": "src/"}
+    },
+    "require": {
+        "vlucas/phpdotenv": "^2.5",
+        "oscarotero/env": "^1.1"
+    }
+}
