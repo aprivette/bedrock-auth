@@ -1,14 +1,14 @@
 <?php
 /**
  * @package WP Bedrock Auth
- * @version 1.0.0
+ * @version 1.0.1
  */
 /*
 Plugin Name: WP Bedrock Auth
 Plugin URI: https://github.com/aprivette/bedrock-auth
 Description: Environment-specific basic auth for the Bedrock WordPress framework.
 Author: Adam Privette
-Version: 1.0.0
+Version: 1.0.1
 Author URI: http://www.dcwebmarketing.com/
 */
 
