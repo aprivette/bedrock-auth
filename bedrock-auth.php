@@ -22,7 +22,6 @@ class BasicAuth
     public function __construct()
     {
         $this->root_dir = dirname(dirname(ABSPATH));
-
         $this->dotenv = new Dotenv\Dotenv($this->root_dir);
 
         Env::init();
@@ -34,27 +33,35 @@ class BasicAuth
             if (env('BASIC_AUTH_USER') && env('BASIC_AUTH_PASS')) {
                 $this->dotenv->load();
                 $this->dotenv->required(['BASIC_AUTH_USER', 'BASIC_AUTH_PASS']);
-
                 $this->requireAuth(env('BASIC_AUTH_USER'), env('BASIC_AUTH_PASS'));
             }
         }
     }
 
-    private function requireAuth($AUTH_USER, $AUTH_PASS) {
-        header('Cache-Control: no-cache, must-revalidate, max-age=0');
+    // Adapted from https://gist.github.com/rchrd2/c94eb4701da57ce9a0ad4d2b00794131
+    private function requireAuth($user, $pass) {
+        add_action('send_headers', function() {
+            header('Cache-Control: no-cache, must-revalidate, max-age=0');
+        });
 
         $has_supplied_credentials = !(empty($_SERVER['PHP_AUTH_USER']) && empty($_SERVER['PHP_AUTH_PW']));
 
         $is_not_authenticated = (
             !$has_supplied_credentials ||
-            $_SERVER['PHP_AUTH_USER'] != $AUTH_USER ||
-            $_SERVER['PHP_AUTH_PW']   != $AUTH_PASS
+            $_SERVER['PHP_AUTH_USER'] != $user ||
+            $_SERVER['PHP_AUTH_PW']   != $pass
         );
 
         if ($is_not_authenticated) {
-            header('HTTP/1.1 401 Authorization Required');
-            header('WWW-Authenticate: Basic realm="Access denied"');
-            exit;
+            add_action('send_headers', function() { 
+                header('HTTP/1.1 401 Authorization Required');
+                header('WWW-Authenticate: Basic realm="Access denied"');
+                wp_die(
+                    'Access denied.',
+                    'Authorization Required',
+                    array('response' => 401)
+                );
+            });
         }
     }
 }
