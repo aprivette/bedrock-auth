@@ -1,30 +1,28 @@
 <?php
 /**
  * @package WP Bedrock Auth
- * @version 1.0.2
+ * @version 1.1.0
  */
 /*
 Plugin Name: WP Bedrock Auth
 Plugin URI: https://github.com/aprivette/bedrock-auth
 Description: Environment-specific basic auth for the Bedrock WordPress framework.
 Author: Adam Privette
-Version: 1.0.2
-Author URI: http://www.dcwebmarketing.com/
+Version: 1.1.0
+Author URI: https://github.com/aprivette/
 */
 
 namespace BedrockAuth;
 
-use Dotenv;
-use Env;
+use Dotenv\Dotenv;
+use function Env\env;
 
 class BasicAuth
 {
     public function __construct()
     {
         $this->root_dir = dirname(dirname(ABSPATH));
-        $this->dotenv = new Dotenv\Dotenv($this->root_dir);
-
-        Env::init();
+        $this->dotenv = Dotenv::createUnsafeImmutable($this->root_dir);
     }
 
     public function initAuth()
@@ -52,7 +50,7 @@ class BasicAuth
         $is_not_authenticated = (
             !$has_supplied_credentials ||
             $_SERVER['PHP_AUTH_USER'] != $user ||
-            $_SERVER['PHP_AUTH_PW']   != $pass
+            $_SERVER['PHP_AUTH_PW'] != $pass
         );
 
         if ($is_not_authenticated) {

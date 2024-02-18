@@ -5,7 +5,8 @@
     "homepage": "https://github.com/aprivette/bedrock-auth",
     "license": "GPL-3.0-or-later",
     "keywords": [
-      "wordpress", "bedrock"
+        "wordpress",
+        "bedrock"
     ],
     "authors": [
         {
@@ -18,7 +19,7 @@
         "psr-4": {"BedrockAuth\\": "src/"}
     },
     "require": {
-        "vlucas/phpdotenv": "^2.5",
-        "oscarotero/env": "^1.1"
+        "vlucas/phpdotenv": "^5.0",
+        "oscarotero/env": "^2.1"
     }
 }
